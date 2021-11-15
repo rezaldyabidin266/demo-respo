@@ -1,0 +1,46 @@
+<section>
+    <!-- <embed [src]="img" width="800px" height="2100px" /> -->
+    <!-- <iframe [src]="fileUrl" width="100%" height="200px" type="application/pdf">
+        
+    </iframe>
+    
+    <br>
+    <br> {{pdf}}
+    <br><br><br> {{fileUrl}} -->
+    <!-- <img [src]="img" alt="Refresh you browser" width="auto" height="300px"> -->
+    <!-- <div class="ratio ratio-1x1">
+        <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
+    </div> -->
+
+    <iframe width="90%" height="700" [attr.src]="pdf" type="application/pdf"></iframe>
+    <!-- <h5>ifRame</h5>
+    <iframe width="90%" height="700" [attr.src]="pdf" type="application/pdf"></iframe>
+    <h5>object whit local url</h5>
+    <object [attr.data]="pdf" type="application/pdf" width="90%" height="700"></object>
+    <h5>embed whit local url</h5>
+    <embed [attr.src]="pdf" type="application/pdf" width="90%" height="700"> -->
+
+
+    <!-- <h5>Gabung</h5>
+    <object [attr.data]="pdf" type="application/pdf" width="90%" height="700">
+        <iframe
+            [attr.src]="pdf" width="100%" height="700px" style="border: none;">
+            <p>Your browser does not support PDFs.
+            <a [attr.href]="pdf">Download the PDF</a>.</p>
+        </iframe>
+    </object> -->
+
+
+    <!-- <iframe [attr.src]="urlGoogle" style="width:90%; height:600px;" frameborder="0"></iframe> {{urlGoogle}} -->
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-3">
+                <a [attr.href]="pdf" class="btn btn-primary " (click)="pdfBlank()">pdf</a>
+                <br><br><br>
+                <button class="btn btn-primary" (click)="windowPdf()">Buka PDF 1 HALAMAN</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- <br> {{pdf}} -->
+</section>

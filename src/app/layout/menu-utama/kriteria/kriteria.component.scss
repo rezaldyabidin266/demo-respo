@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+// 
+section {
+    margin-top: 4rem;
+    height: 450px;
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#button .button-indicator {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    color: white;
+}
+
+.judul-lowongan {
+    position: relative;
+    margin-top: -10px;
+    text-align: center;
+    h2 {
+        color: #A3DE83;
+        font-size: 1.7rem;
+        text-shadow: 2px 2px 2px rgb(0, 0, 0, 60%);
+        font-family: 'Rubik', sans-serif;
+        letter-spacing: 3px;
+    }
+    p {
+        color: #FFFFFF;
+        text-shadow: 2px 2px 2px rgb(0, 0, 0, 45%);
+        width: 50%;
+        font-size: 1rem;
+        margin: 0 auto;
+        line-height: 1.6;
+        letter-spacing: 1px;
+    }
+}
+
+.overflay {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    background: #FEFFEA;
+    z-index: -1;
+}
+
+.col-kriteria {
+    .kriteria {
+        .card-body {
+            margin-top: -70px;
+            background: #FEFFEA;
+            box-shadow: 0 0 20px 0 rgb(0 0 0 / 15%);
+            border-radius: 10px;
+            .row {
+                padding: 2rem 2rem;
+                .kri {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: right;
+                    .kriteriaImg {
+                        width: 100%;
+                        max-width: 180px;
+                        height: auto;
+                        object-fit: cover;
+                    }
+                }
+                .kriteria-text {
+                    p {
+                        font-family: 'Rubik', sans-serif;
+                        letter-spacing: 1px;
+                        font-size: 1rem;
+                        margin-bottom: 7px !important;
+                    }
+                    ul {
+                        padding-left: 1rem;
+                        margin-bottom: 5px !important;
+                        li {
+                            font-weight: lighter;
+                            font-size: 0.9rem;
+                            font-family: 'Rubik', sans-serif;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.kriteria-daftar {
+    padding-bottom: 60px;
+    h2 {
+        text-align: center;
+        font-family: 'Patrick Hand', cursive;
+        color: #E94455;
+        letter-spacing: 3px;
+        font-size: 3.5rem;
+        margin-bottom: 30px;
+    }
+    form {
+        .dx-fieldset {
+            margin: 0 !important;
+        }
+    }
+}
+
+.form-label {
+    font-weight: 400 !important;
+    letter-spacing: 1px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.btn-create {
+    background: #1784E3;
+    box-shadow: 0 0 15px 0 rgb(1 86 255 / 50%);
+    padding: .25rem 2.2rem;
+    color: white;
+    font-size: .95rem;
+}
+
+.tombol-next {
+    padding-top: 40px;
+    padding-bottom: 100px;
+    text-align: center;
+    .btn-pertanyaan {
+        font-family: 'Rubik', sans-serif;
+        background: #2EB872;
+        box-shadow: 0 0 15px 0 rgb(31 228 77 / 50%);
+        padding: .25rem 2.4rem;
+        color: white;
+        font-size: .98rem;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {}
+
+@media only screen and (max-width: 998px) {
+    section {
+        height: 300px;
+    }
+    .judul-lowongan {
+        text-align: center;
+        h2 {
+            color: #A3DE83;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 30%);
+        }
+        p {
+            color: #FFFFFF;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 30%);
+            width: 60%;
+            font-size: 0.9rem;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+    }
+    .col-kriteria {
+        .kriteria {
+            .card-body {
+                margin-top: -55px;
+                background: #FEFFEA;
+                box-shadow: 0 0 20px 0 rgb(0 0 0 / 15%);
+                border-radius: 10px;
+                .row {
+                    padding: 1.7rem 1.7rem;
+                    .kri {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: right;
+                        margin-bottom: 32px;
+                        .kriteriaImg {
+                            width: 100%;
+                            max-width: 180px;
+                            height: auto;
+                            object-fit: cover;
+                        }
+                    }
+                    .kriteria-text {
+                        p {
+                            font-family: 'Rubik', sans-serif;
+                            letter-spacing: 1px;
+                            font-size: 1rem;
+                            margin-bottom: 7px !important;
+                        }
+                        ul {
+                            padding-left: 1rem;
+                            margin-bottom: 5px !important;
+                            li {
+                                font-weight: lighter;
+                                font-size: 0.9rem;
+                                font-family: 'Rubik', sans-serif;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .tombol-next {
+        padding-top: 20px;
+        padding-bottom: 70px;
+        text-align: center;
+        .btn-pertanyaan {
+            font-family: 'Rubik', sans-serif;
+            background: #2EB872;
+            box-shadow: 0 0 15px 0 rgb(31 228 77 / 50%);
+            padding: .25rem 2.4rem;
+            color: white;
+            font-size: .98rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {}
+
+@media only screen and (max-width: 480px) {
+    section {
+        height: 250px;
+    }
+    .judul-lowongan {
+        text-align: center;
+        h2 {
+            color: #A3DE83;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 2px rgb(0, 0, 0, 60%);
+        }
+        p {
+            color: #FFFFFF;
+            text-shadow: 1px 1px 2px rgb(0, 0, 0, 40%);
+            width: 90%;
+            font-size: 0.8rem;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+    }
+    .col-kriteria {
+        .kriteria {
+            .card-body {
+                margin-top: -40px;
+                background: #FEFFEA;
+                box-shadow: 0 0 20px 0 rgb(0 0 0 / 15%);
+                border-radius: 10px;
+                .row {
+                    padding: 1.2rem 1rem;
+                    .kri {
+                        margin-bottom: 25px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        .kriteriaImg {
+                            width: 100%;
+                            max-width: 140px;
+                            height: auto;
+                            object-fit: cover;
+                        }
+                    }
+                    .kriteria-text {
+                        p {
+                            font-family: 'Rubik', sans-serif;
+                            letter-spacing: 1px;
+                            font-size: 1rem;
+                            margin-bottom: 7px !important;
+                        }
+                        ul {
+                            padding-left: 1rem;
+                            margin-bottom: 5px !important;
+                            li {
+                                font-weight: lighter;
+                                font-size: 0.9rem;
+                                font-family: 'Rubik', sans-serif;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 320px) {}

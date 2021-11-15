@@ -1,0 +1,428 @@
+<section>
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 mb-4">
+                <div class="profile">
+                    <div class="row">
+                        <div class="col-md-12 foto-pelamar">
+                            <div class="img-wrap d-flex align-items-center flex-column" id="dropzone-image">
+                                <img [src]="img" style="cursor: pointer;" class="img-thumbnail">
+                                <div [hidden]="true">
+                                    <dx-file-uploader (onProgress)="progressFoto($event)" (onUploaded)="prosesChange($event)" dialogTrigger="#dropzone-image" style="display: none;" name="FileGambar" [uploadHeaders]="{
+                                    token: token
+                                }" [allowedFileExtensions]="['.jpg', '.jpeg', '.png']" [(uploadUrl)]="apiFoto" [multiple]="false" accept="*" [(value)]="gambar" uploadMode="instantly">
+                                    </dx-file-uploader>
+                                </div>
+                                <div class="btn-uploadEdit flex-fill d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-camera"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="editProfile">
+                        <div class="col-md-12 mb-2" *ngIf="spinFoto">
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Ganti Foto Profile
+                        </div>
+                        <div class="col-md-12 mb-2" *ngIf="spinGetFoto">
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Ambil Foto Profile
+                        </div>
+                        <div class="col-md-12 mb-2" *ngIf="spinUploadFoto">
+                            Belum Upload Foto
+                        </div>
+                        <div class="col-md-12">
+                            <h2 class="">{{profile.nama}}</h2>
+                        </div>
+                        <div class="col-md-12">
+                            <h3>Pelamar</h3>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="d-flex flex-column">
+                                <h6 class="d-flex align-items-center">
+                                    <i class="fas fa-birthday-cake me-2"></i> {{profile.tmptLahir}}, {{profile.tglLahir | date:'fullDate'}}
+                                </h6>
+                                <h6 class="d-flex" id="alamatBr">
+                                    <i class="fas fa-map-marker-alt me-2"></i> {{profile.alamat}}
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-1">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-12">
+                                    <button class="btn btn-primary btn-edit btn-sm w-100" type="button" style="background-color: #2EB872;" id="dropzone-imageUploadButton">Upload Foto</button>
+                                    <div [hidden]="true">
+                                        <dx-file-uploader (onProgress)="progressFoto($event)" (onUploaded)="prosesChange($event)" dialogTrigger="#dropzone-imageUploadButton" style="display: none;" name="FileGambar" [uploadHeaders]="{
+                                        token: token
+                                    }" [allowedFileExtensions]="['.jpg', '.jpeg', '.png']" [(uploadUrl)]="apiFoto" [multiple]="false" accept="*" [(value)]="gambar" uploadMode="instantly">
+                                        </dx-file-uploader>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12">
+                                    <a routerLink="/berkas" class="btn btn-primary btn-edit btn-sm w-100" type="button" style="background-color: #E94455;">Berkas lamaran</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="d-grid gap-2">
+                                <a class="btn btn-primary btn-edit btn-sm" (click)="editPelamar()">Edit Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row editProfile" *ngIf="editProfile !== true">
+                        <form action="" class="">
+                            <div class="dx-fieldset row g-3">
+                                <div class="col-md-12">
+                                    <div class="dx-field">
+                                        <label class="form-label">Nama</label>
+                                        <dx-text-box valueChangeEvent="keyup" id="Nama" [(value)]="nama" [showClearButton]="true" placeholder="Masukan Nama" [stylingMode]="stylingModeProfile">
+                                            <dx-validator>
+                                                <dxi-validation-rule type="required" message="Nama harus di isi"></dxi-validation-rule>
+                                                <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                                </dxi-validation-rule>
+                                            </dx-validator>
+                                        </dx-text-box>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <div class="dx-field">
+                                        <label class="form-label">No Telepon </label>
+                                        <dx-text-box valueChangeEvent="keyup" mask="####-####-#######" maskChar=" " mode="tel" [(value)]="noTlp" [showClearButton]="true" placeholder="Masukan No Telepon" [stylingMode]="stylingModeProfile">
+                                            <dx-validator>
+                                                <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                                </dxi-validation-rule>
+                                            </dx-validator>
+                                        </dx-text-box>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="dx-field">
+                                        <label class="form-label">Tempat Lahir</label>
+                                        <dx-text-box valueChangeEvent="keyup" id="tempatLahir" [(value)]="tempatLahir" [showClearButton]="true" placeholder="Masukan Tempat Lahir" [stylingMode]="stylingModeProfile">
+                                            <dx-validator>
+                                                <dxi-validation-rule type="required" message="Tempat Lahir harus di isi"></dxi-validation-rule>
+                                                <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                                </dxi-validation-rule>
+                                            </dx-validator>
+                                        </dx-text-box>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <div class="dx-field">
+                                        <label class="form-label">Tanggal Lahir</label>
+                                        <dx-date-box valueChangeEvent="keyup" (onInitialized)="onInitialized($event)" [useMaskBehavior]="true" pickerType="list" [(value)]="tglLahir" type="date" displayFormat="dd/MMMM/yyyy" [showClearButton]="true" placeholder="27/February/2021" [stylingMode]="stylingModeProfile">
+                                            <dx-validator>
+                                                <dxi-validation-rule type="required" message="Tanggal Lahir harus di isi"></dxi-validation-rule>
+                                                <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                                </dxi-validation-rule>
+                                            </dx-validator>
+                                        </dx-date-box>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="dx-field">
+                                        <label class="form-label">Alamat</label>
+                                        <dx-text-area valueChangeEvent="keyup" [height]="100" id="Alamat" [(value)]="alamat" placeholder="Masukan Alamat" [stylingMode]="stylingModeProfile">
+                                            <dx-validator>
+                                                <dxi-validation-rule type="required" message="Alamat harus di isi"></dxi-validation-rule>
+                                                <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                                </dxi-validation-rule>
+                                            </dx-validator>
+                                        </dx-text-area>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="d-grid gap-2 d-md-block blok">
+                            <button class="btn btn-saveChange btn-sm btn-margin" (click)="editProfileValue($event)" type="submit">
+                                <span *ngIf="spinSave" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                                Save Changes</button>
+                            <button class="btn btn-cancel btn-sm" (click)="editCancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PENGALAMANNNNN -->
+            <div class="col-lg-8 col-md-12">
+                <div class="pengalaman">
+                    <div class="row g-3 ">
+                        <div class="col-md-12 mb-0">
+                            <div class="d-flex align-items-center icon-icon">
+                                <h3 class="me-auto title-pengalaman d-flex align-items-center">
+                                    <i class="fas fa-briefcase me-2 fa-lg"></i>Pengalaman Anda
+                                </h3>
+                                <div class="btn-des">
+                                    <div class="d-flex align-items-center">
+                                        <button id="dropzone-cv" class="btn btn-sm d-flex align-items-center me-2 text-white" style="background-color: #E94455;">
+                                            <span *ngIf="spinCv" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                            <i class="fas fa-file-pdf me-2"></i>
+                                            Upload Cv 
+                                        </button >
+                                        <div [hidden]="true">
+                                                <dx-file-uploader (onProgress)="progressCv($event)" (onUploaded)="prosesChangeCv($event)" dialogTrigger="#dropzone-cv"  name="FileGambar" [uploadHeaders]="{
+                                                    token: token
+                                                }" [allowedFileExtensions]="['.pdf']" [(uploadUrl)]="apiCv" [multiple]="false" accept="*" [(value)]="cv" uploadMode="instantly">
+                                            </dx-file-uploader>
+                                        </div>
+                                        <button (click)="showPdf()" class="btn text-white btn-sm d-flex align-items-center me-2" style="background-color: #A8A7A7;">
+                                            <i class="fas fa-file-pdf me-2"></i>
+                                            Cv Anda
+                                        </button >
+                                        <button class="btn btn-sm d-flex align-items-center text-white" style="background-color: #2EB872;" data-bs-toggle="modal" data-bs-target="#addPengalaman">
+                                            <i class="fas fa-file-medical me-2"></i>
+                                            New Pengalaman
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 btn-mobile">
+                            <div class="row g-3">
+                                <div class="col-md-6 col-sm-6 col-6 ">
+                                    <button (click)="showPdf()" class="btn btn-sm text-white" style="width: 100% !important; background-color:#A8A7A7;">
+                                        <i class="fas fa-file-pdf me-2"></i>
+                                         Cv
+                                     </button >
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-6">
+                                    <button id="dropzone-cvMobile" class="btn btn-sm text-white" style="width: 100% !important; background-color: #E94455;">
+                                        <span *ngIf="spinCv" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        <i class="fas fa-file-pdf me-2"></i>
+                                         Upload Cv
+                                     </button >
+                                     <div [hidden]="true">
+                                            <dx-file-uploader (onProgress)="progressCv($event)" (onUploaded)="prosesChangeCv($event)" dialogTrigger="#dropzone-cvMobile"  name="FileGambar" [uploadHeaders]="{
+                                                token: token
+                                            }" [allowedFileExtensions]="['.pdf']" [(uploadUrl)]="apiCv" [multiple]="false" accept="*" [(value)]="cv" uploadMode="instantly">
+                                        </dx-file-uploader>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-12">
+                                    <button class="btn btn-sm d-flex justify-content-center align-items-center text-white" data-bs-toggle="modal" data-bs-target="#addPengalaman" style="width: 100% !important; background-color: #2EB872;">
+                                        <i class="fas fa-file-medical me-2"></i>
+                                        New Pengalaman
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngFor="let pengalamanValue  of pengalaman;trackBy: trackByFn">
+                            <div class="card card-pengalaman">
+                                <!--[@pengalamanAdd]="pengalamanAnimasi  [@pengalamanEnter]" -->
+                                <div class="card-body">
+                                    <div class="judul d-flex flex-wrap align-items-center">
+                                        <h4 class="me-auto" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#updatePengalaman">{{pengalamanValue.tempatKerja}}</h4>
+                                        <div class="d-flex align-items-center icon">
+                                            <i class="fas fa-edit text-primary" (click)="modalPengalaman(pengalamanValue.id)" data-bs-toggle="modal" data-bs-target="#updatePengalaman" style="cursor: pointer;"></i>
+                                            <span class="delete text-danger d-flex align-items-center" style="cursor: pointer;">
+                                                <span *ngIf="statusDelete" class="spinner-grow spinner-grow-sm spin-del" role="status" aria-hidden="true"></span>
+                                            <i class="fas fa-trash-alt" (click)="deletePengalaman(pengalamanValue.id,'index')"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="posisi">
+                                        <h3>{{pengalamanValue.posisi}}</h3>
+                                    </div>
+                                    <div class="content d-flex align-items-center">
+                                        <div class="me-auto d-flex align-items-center gaji">
+                                            <i class="material-icons me-1 text-success" style="cursor: pointer;">paid</i>
+                                            <span>
+                                            {{pengalamanValue.nominal | currency:'IDR ':'symbol':'3.0'}}
+                                            </span>
+                                        </div>
+                                        <span class="badge">Kerja {{pengalamanValue.masaKerja}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="noPengalaman" *ngIf="pengalaman.length == 0">
+                            <h5 class="">Kamu belum isi pengalaman</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Modal PEngalamanAdd -->
+<div class="modal fade" id="addPengalaman" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-addPengalaman modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body addPengalaman">
+                <h5 class="modal-title"> <i class="fas fa-briefcase me-2 fa-lg"></i>Tambah Pengalaman</h5>
+                <form action="">
+                    <div class="dx-fieldset row g-3">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="dx-field">
+                                <label class="form-label">Tempat Kerja </label>
+                                <dx-text-box valueChangeEvent="keyup" id="tempatKerja" [(value)]="tempatKerja" [showClearButton]="true" placeholder="Masukan Tempat Kerja" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Jabatan/Posisi</label>
+                                <dx-text-box valueChangeEvent="keyup" id="posisi" [(value)]="posisi" [showClearButton]="true" placeholder="Masukan Jabatan" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Salary</label>
+                                <dx-number-box valueChangeEvent="keyup" id="salary" format="Rp #,##0.##" [(value)]="salary" [showClearButton]="true" placeholder="Masukan Salary " [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-number-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Tanggal Masuk</label>
+                                <dx-date-box valueChangeEvent="keyup" pickerType="list" (onInitialized)="onInitialized($event)" [(value)]="tglMasuk" [useMaskBehavior]="true" displayFormat="dd/MMMM/yyyy" placeholder="27/February/2021" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-date-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Tanggal Resign</label>
+                                <dx-date-box valueChangeEvent="keyup" pickerType="list" (onInitialized)="onInitialized($event)" [(value)]="tglAkhir" [useMaskBehavior]="true" displayFormat="dd/MMMM/yyyy" placeholder="27/February/2021" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-date-box>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="dx-field">
+                                <label class="form-label">Pengalaman Kerja</label>
+                                <dx-text-area valueChangeEvent="keyup" [height]="70" id="keterangan" [(value)]="keterangan" placeholder="Jelaskan tentang pekerjaan anda" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-area>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-saveChange btn-daftar" (click)="addPengalaman('add')" type="submit" data-bs-dismiss="modal" aria-label="Close"> 
+                    <span *ngIf="spinAdd" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Save
+                </button>
+                <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal PengalamanUpdate-->
+<div class="modal fade" id="updatePengalaman" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-addPengalaman modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body addPengalaman">
+                <h5 class="modal-title"> <i class="fas fa-briefcase me-2 fa-lg"></i>Ganti Pengalaman</h5>
+                <form action="">
+                    <div class="dx-fieldset row g-3">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="dx-field">
+                                <label class="form-label">Tempat Kerja </label>
+                                <dx-text-box valueChangeEvent="keyup" id="tempatKerja" [(value)]="tempatKerjaUpdate" [showClearButton]="true" placeholder="Masukan Tempat Kerja" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Jabatan/Posisi</label>
+                                <dx-text-box valueChangeEvent="keyup" id="posisi" [(value)]="posisiUpdate" [showClearButton]="true" placeholder="Masukan Posisi" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Salary</label>
+                                <dx-number-box valueChangeEvent="keyup" id="salary" format="Rp #,##0.##" [(value)]="salaryUpdate" [showClearButton]="true" placeholder="Masukan Salary " [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-number-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Tanggal Masuk</label>
+                                <dx-date-box valueChangeEvent="keyup" pickerType="list" (onInitialized)="onInitialized($event)" [(value)]="tglMasukUpdate" [useMaskBehavior]="true" displayFormat="dd/MMMM/yyyy" placeholder="27/February/2021" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-date-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Tanggal Resign</label>
+                                <dx-date-box valueChangeEvent="keyup" pickerType="list" (onInitialized)="onInitialized($event)" [(value)]="tglAkhirUpdate" [useMaskBehavior]="true" displayFormat="dd/MMMM/yyyy" placeholder="27/February/2021" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-date-box>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="dx-field">
+                                <label class="form-label">Pengalaman Kerja</label>
+                                <dx-text-area valueChangeEvent="keyup" [height]="70" id="keterangan" [(value)]="keteranganUpdate" [stylingMode]="stylingMode" placeholder="Masukan Pengalaman Kerja anda ">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-area>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-saveChange btn-daftar" (click)="onUpdate(pengalamanId.id)" type="submit" data-bs-dismiss="modal" aria-label="Close">
+                    <span *ngIf="spinUpdate" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Save Changes
+                </button>
+                <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

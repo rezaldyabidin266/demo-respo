@@ -1,0 +1,144 @@
+<section class="border" [style.background-image]="kriteriaBackground">
+    <div class="judul-lowongan">
+        <h2>{{kriteria.judulLowongan}}</h2>
+        <p>{{kriteria.keterangan}}</p>
+    </div>
+</section>
+<div class="overflay"></div>    
+<div class="container-lg">
+    <div class="row justify-content-md-center justify-content-center">
+        <div class="col-md-7 col-sm-10 col-11 col-kriteria">
+            <div class="kriteria">
+                <div class="card-body">
+                    <div class="row ">
+                        <div class="col-lg-6 kri">
+                            <img class="kriteriaImg" [src]="kriteriaIcon" alt="">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="kriteria-text">
+                                <p>Kriteria Pelamar :</p>
+                                <ul class="" *ngFor="let listLoker of list">
+                                    <li class="">{{listLoker}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 mt-5">
+            <div class="kriteria-daftar" *ngIf="!logIn">
+                <h2>Sign Up</h2>
+                <div class="row form-kriteria">
+                    <form (submit)="onSubmit($event)" >
+                        <div class="dx-fieldset row g-3">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="dx-field">
+                                    <label class="form-label">Nama</label>
+                                    <dx-text-box id="Nama" [(value)]="nama" valueChangeEvent="keyup" [showClearButton]="true" placeholder="Nama Lengkap" [stylingMode]="stylingMode">
+                                        <dx-validator>
+                                            <dxi-validation-rule type="required" message="Nama harus di isi"></dxi-validation-rule>
+                                            <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                            </dxi-validation-rule>
+                                        </dx-validator>
+                                    </dx-text-box>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="dx-field ">
+                                    <label class="form-label">Email</label>
+                                    <dx-text-box id="email" valueChangeEvent="keyup" [(value)]="email" [showClearButton]="true" placeholder="Alamat Email" [stylingMode]="stylingMode">
+                                        <dx-validator>
+                                            <dxi-validation-rule type="required" message="email harus di isi"></dxi-validation-rule>
+                                            <dxi-validation-rule type="email" message="Email is invalid"></dxi-validation-rule>
+                                            <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                            </dxi-validation-rule>
+                                        </dx-validator>
+                                    </dx-text-box>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="dx-field">
+                                    <label class="form-label">Password</label>
+                                    <dx-text-box id="Password" valueChangeEvent="keyup" mode="password" [(value)]="password" [showClearButton]="true" placeholder="Password" [stylingMode]="stylingMode">
+                                        <dx-validator>
+                                            <dxi-validation-rule type="required" message="Password harus di isi"></dxi-validation-rule>
+                                            <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                            </dxi-validation-rule>
+                                        </dx-validator>
+                                    </dx-text-box>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="dx-field">
+                                    <label class="form-label">No Telepon</label>
+                                    <dx-text-box valueChangeEvent="keyup" (onValueChanged)="phone($event)" mask="####-####-#######" maskChar=" " mode="tel" [(value)]="noTlp" [showClearButton]="true" placeholder="No Telpn" [stylingMode]="stylingMode">
+                                        <dx-validator>
+                                            <dxi-validation-rule type="required" message="No Telepon harus di isi"></dxi-validation-rule>
+                                            <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                            </dxi-validation-rule>
+                                        </dx-validator>
+                                    </dx-text-box>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="dx-field">
+                                    <label class="form-label">Tempat Lahir</label>
+                                    <dx-text-box valueChangeEvent="keyup" id="tempatLahir" [(value)]="tempatLahir" [showClearButton]="true" placeholder="Tempat Lahir" [stylingMode]="stylingMode">
+                                        <dx-validator>
+                                            <dxi-validation-rule type="required" message="Tempat Lahir harus di isi"></dxi-validation-rule>
+                                            <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                            </dxi-validation-rule>
+                                        </dx-validator>
+                                    </dx-text-box>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="dx-field">
+                                    <label class="form-label">Tanggal Lahir</label>
+                                    <dx-date-box valueChangeEvent="keyup" [useMaskBehavior]="true" displayFormat="dd/MMMM/yyyy" placeholder="27/February/2021" pickerType="list" [(value)]="tglLahir" type="date" [showClearButton]="true" [stylingMode]="stylingMode">
+                                        <dx-validator>
+                                            <dxi-validation-rule type="required" message="Tanggal Lahir harus di isi"></dxi-validation-rule>
+                                            <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                            </dxi-validation-rule>
+                                        </dx-validator>
+                                    </dx-date-box>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="dx-field">
+                                    <label class="form-label">Alamat</label>
+                                    <dx-text-area valueChangeEvent="keyup" id="Alamat" [height]="100" [(value)]="alamat" placeholder="Alamat saat ini" [stylingMode]="stylingMode">
+                                        <dx-validator>
+                                            <dxi-validation-rule type="required" message="Alamat harus di isi"></dxi-validation-rule>
+                                            <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                            </dxi-validation-rule>
+                                        </dx-validator>
+                                    </dx-text-area>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 mt-4">
+                                <!-- <button class="btn btn-create">
+                                    <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Sign Up
+                                  </button> -->
+                                <dx-button id="button" class="btn-create" text="Sign Up" type="success" [useSubmitBehavior]="true">
+                                    <span *ngIf="spin" class="spinner-border spinner-border-sm button-indicator" role="status" aria-hidden="true"></span>
+                                    <span class='dx-button-text'>Sign Up</span>
+                                </dx-button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tombol-next" *ngIf="logIn">
+                <button class="btn btn-pertanyaan" type="submit" (click)="goPertanyaan()">
+                    <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <i class="fas fa-question-circle fa-md me-1"></i> Lanjut Ke Pertanyaan
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+.

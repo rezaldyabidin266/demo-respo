@@ -1,0 +1,134 @@
+<section>
+    <div class="container-lg">
+        <div class="row justify-content-md-center ">
+            <div class="col-md-7 img-col text-center">
+                <div class="img-wrap mx-auto">
+                    <!-- <img src="../../../../assets/image/terimakasih.png" alt=""> -->
+                    <img [src]="imgMotivasi" >
+                </div>
+                <button type="button" class="btn btn-loker mt-5" (click)="goLoker()"><i class="fas fa-arrow-left me-2"></i>Back Loker</button>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-8 list-end">
+                <ul class="nav nav-tabs tab-end justify-content-center" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Biodata</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pertanyaan</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Pengalaman</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="tab-content row justify-content-md-center" id="myTabContent">
+            <div class="tab-pane fade show active col-md-8" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="card card-tab">
+                    <div class="card-body card-profile">
+                        <div class="row g-3">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-profile">
+                                <div class="img-wrap">
+                                    <img [src]="img" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-biodata">
+                                <div class="biodata">
+                                    <div class="row">
+                                        <div class="col-md-12 pelamar-data">
+                                            <h1>{{infoPelamar.nama}}</h1>
+                                            <h4>
+                                                <i class="fas fa-birthday-cake me-2"></i> {{infoPelamar.tmptLahir}}, {{infoPelamar.tglLahir | date:'fullDate'}}
+                                            </h4>
+                                            <h4>
+                                                <i class="fas fa-map-marker-alt me-2"></i> {{infoPelamar.alamat}}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade col-md-8" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="card card-tab pt-4 pb-4">
+                    <div class="card-body card-pertanyaan" *ngFor="let soal of pertanyaan">
+                        <div class="pertanyaan">
+                            <div class="row d-flex align-items-center ">
+                                <div class="col-md-7 col-sm-7 col-12">
+                                    <span class="pertanyaan-soal">
+                                        {{soal.no}}. {{soal.pertanyaan}}
+                                        </span>
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-12 jawaban">
+                                    <span class="">
+                                            {{soal.jawaban}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade col-md-8" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="card card-tab ">
+                    <div class="story" *ngFor="let value of pengalamanMobile; let i = index">
+                        <div class="card card-story">
+                            <div class="item">
+                                <div class="card-title d-flex align-items-center">
+                                    <span class="me-auto">
+                                        Pengalaman {{i + 1}}
+                                    </span>
+                                </div>
+                                <div class="row card-list">
+                                    <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                        Tempat Kerja
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                        {{value.tempatKerja}}
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                        Jabatan/Posisi
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                        {{value.posisi}}
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-12 card-excel">
+                                        Pengalaman Kerja
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-12 card-excelIsi">
+                                        {{value.keterangan}}
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                        Salary
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                        {{value.nominal}}
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                        Tanggal Masuk
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                        {{value.tglAwal | date:'longDate'}}
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                        Tanggal Resign
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                        {{value.tglAkhir | date:'longDate'}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,30 @@
+<section>
+    <div class="container-lg">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-5 col-md-6">
+                <div class="lp-pw">
+                    <div class="card-body">
+                        <h2 class="card-title"> Reset Password</h2>
+                        <form action="" [formGroup]="formOtp">
+                            <div class="dx-fieldset row g-3">
+                                <div class="col-md-12 mb-3">
+                                    <div class="dx-field">
+                                        <label class="form-label mb-3">Harap periksa teks berisi kode di ponsel anda.
+                                        Kode anda memiliki panjang 4 karakter</label>
+                                        <input type="tel" maxlength="4" class="form-control" id="Otp" name="Otp" formControlName="Otp" placeholder="Masukan Kode OTP" required>
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-create" (click)="onSubmit()" type="submit">
+                                        <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Lanjutkan
+                                      </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

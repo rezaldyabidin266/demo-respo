@@ -1,0 +1,63 @@
+<section>
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col-12">
+                <div class="img-brand">
+                    <img src="../../assets/image/faviconLogo.png" alt="">
+                </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-12">
+                <div class="judul">
+                    <h5 class="shake">
+                        Job List
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-md-center ">
+            <div class="col-md-12">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-7">
+                        <div class="kalimat">
+                            <div class="card-body ">
+                                <h6 id="kalimat" [@fade]="status" #kalimat>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="gambarFtp">
+                    <div class="card mx-auto">
+                        <div class="card-header">
+                            <h6 class="card-title">
+                                Take a look
+                            </h6>
+                        </div>
+                        <img [src]="img" alt="Refresh you browser">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row loker">
+            <div class="col-md-12">
+                <div class="row d-flex align-items-center mt-5 loker-list" *ngFor="let loker of lokerList" (click)="goKriteria(loker.id)">
+                    <div class="col-md-2 loker-judul ">
+                        <p class="">{{loker.judulLowongan}}</p>
+                    </div>
+                    <div class="col-md-8 loker-keterangan">
+                        <p>{{loker.keterangan}}</p>
+                    </div>
+                    <div class="col-md-2 loker-btn">
+                        <div class="btn btn-create" type="button" (click)="goKriteria(loker.id)" (mouseenter)="effect('masuk')" (mouseleave)="effect('keluar')" [@effectAnimation]="effectAnim">
+                            Daftar  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

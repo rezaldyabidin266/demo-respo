@@ -1,0 +1,148 @@
+<section>
+    <div class="container-lg">
+        <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <!-- <div class="card card-banner">
+                </div> -->
+                <div class="judul-pertanyaan">
+                    <h2>Pertanyaan</h2>
+                    <p>Harap isi semua pertanyaan !</p>
+                </div>
+                <div *ngFor="let soal of pertanyaan">
+                    <!-- pilihan Ganda -->
+                    <div class="card-body" *ngIf="soal.bentukIsian === 'Yes No Question' ">
+                        <p class="d-flex">
+                            <span class="me-auto">
+                                {{soal.pertanyaan}}
+                            </span>
+                            <span class="bintang">
+                                *
+                            </span>
+                        </p>
+                        <div class="dx-field">
+                            <div class="dx-field-value">
+                                <dx-radio-group [items]="valueGanda" (onValueChanged)="onValueGanda(soal.id,$event,soal.pertanyaan)">
+                                </dx-radio-group>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paragraf -->
+                    <div class="card-body" *ngIf="soal.bentukIsian === 'Paragraf' ">
+                        <p class="d-flex">
+                            <span class="me-auto">
+                                {{soal.pertanyaan}}
+                            </span>
+                            <span class="bintang">
+                                *
+                            </span>
+                        </p>
+                        <div class="dx-field">
+                            <div class="dx-field-value">
+                                <dx-text-area [height]="50" (onValueChanged)="onValueParagraf(soal.id,$event,soal.pertanyaan)" [stylingMode]="stylingMode" placeholder="Enter Jawaban">
+                                </dx-text-area>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nominal -->
+                    <div class="card-body" *ngIf="soal.bentukIsian === 'Nominal' ">
+                        <p class="d-flex">
+                            <span class="me-auto">
+                                {{soal.pertanyaan}}
+                            </span>
+                            <span class="bintang">
+                                *
+                            </span>
+                        </p>
+                        <div class="dx-field">
+                            <div class="dx-field-value">
+                                <dx-number-box mode="tel" [min]="0" format="Rp #,##0.##" [showClearButton]="true" (onValueChanged)="onValueNominal(soal.id,$event,soal.pertanyaan)" [stylingMode]="stylingMode">
+                                </dx-number-box>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simple Text -->
+                    <div class="card-body" *ngIf="soal.bentukIsian === 'Simple Text' ">
+                        <p class="d-flex">
+                            <span class="me-auto">
+                                {{soal.pertanyaan}}
+                            </span>
+                            <span class="bintang">
+                                *
+                            </span>
+                        </p>
+                        <div class="dx-field">
+                            <div class="dx-field-value">
+                                <dx-text-box (onValueChanged)="onValueSimpleText(soal.id,$event,soal.pertanyaan)" [stylingMode]="stylingMode" placeholder="Enter Jawaban"></dx-text-box>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tanggal -->
+                    <div class="card-body" *ngIf="soal.bentukIsian === 'Tanggal' ">
+                        <p class="d-flex">
+                            <span class="me-auto">
+                                {{soal.pertanyaan}}
+                            </span>
+                            <span class="bintang">
+                                *
+                            </span>
+                        </p>
+                        <div class="dx-field">
+                            <div class="dx-field-value">
+                                <dx-date-box (onInitialized)="onInitialized($event)" pickerType="list" type="date" [useMaskBehavior]="true" displayFormat="dd/MMMM/yyyy" placeholder="27/February/2021" [showClearButton]="true" (onValueChanged)="onValueDate(soal.id,$event,soal.pertanyaan)"
+                                    [stylingMode]="stylingMode">
+                                </dx-date-box>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CheckBox -->
+                    <div class="card-body" *ngIf="soal.bentukIsian === 'Checkbox' ">
+                        <p class="d-flex">
+                            <span class="me-auto">
+                                {{soal.pertanyaan}}
+                            </span>
+                            <span class="bintang">
+                                *
+                            </span>
+                        </p>
+                        <div class="dx-field">
+                            <div class="dx-field-value">
+                                <dx-tag-box [items]="soal.pilihan" (onValueChanged)="onValueCheckBox(soal.id,$event,soal.pertanyaan)" [showSelectionControls]="true" applyValueMode="useButtons" placeholder="Silahkan Pilih...">
+                                </dx-tag-box>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Pilihan Ganda  -->
+                    <div class="card-body" *ngIf="soal.bentukIsian === 'Pilihan Ganda' ">
+                        <p class="d-flex">
+                            <span class="me-auto">
+                                {{soal.pertanyaan}}
+                            </span>
+                            <span class="bintang">
+                                *
+                            </span>
+                        </p>
+                        <div class="dx-field">
+                            <div class="dx-field-value">
+                                <dx-radio-group class="radio" [items]="soal.pilihan" (onValueChanged)="onValuePilihanGanda(soal.id,$event,soal.pertanyaan)">
+                                </dx-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 mt-4 mb-4">
+                    <button class="btn btn-create" (click)="onSubmit()" type="submit">
+                        <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Kirim Jawaban
+                      </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

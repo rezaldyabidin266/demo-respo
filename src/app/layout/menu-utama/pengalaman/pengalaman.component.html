@@ -1,0 +1,153 @@
+<section>
+    <div class="container-lg">
+        <div class="row justify-content-md-center">
+            <div class="col-md-7">
+                <!-- <div class="card card-banner">
+                </div> -->
+                <div class="judul-pertanyaan">
+                    <h2>Pengalaman Kerja</h2>
+                    <p>Diharapkan memberitahu pengalaman kerja !</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <form action="">
+                    <div class="dx-fieldset row g-3">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field ">
+                                <label class="form-label">Tempat Kerja</label>
+                                <dx-text-box id="tempatKerja" [(value)]="tempatKerja" [showClearButton]="true" placeholder="Masukan Tempat Kerja" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dx-field">
+                                <label class="form-label">Jabatan/Posisi</label>
+                                <dx-text-box id="posisi" [(value)]="posisi" [showClearButton]="true" placeholder="Masukan Jabatan" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="dx-field">
+                                <label class="form-label">Salary</label>
+                                <dx-number-box mode="tel" [min]="0" id="salary" format="Rp #,##0.##" [(value)]="salary" [showClearButton]="true" placeholder="Masukan Salary " [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-number-box>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="dx-field">
+                                <label class="form-label">Tanggal Masuk</label>
+                                <dx-date-box [acceptCustomValue]="dateCustom" pickerType="list" [(value)]="tglMasuk" displayFormat="dd, MMM yyyy" [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-date-box>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="dx-field">
+                                <label class="form-label">Tanggal Keluar</label>
+                                <dx-date-box [acceptCustomValue]="dateCustom" pickerType="list" (onInitialized)="onInitialized($event)" [(value)]="tglAkhir" displayFormat="dd, MMM yyyy " [stylingMode]="stylingMode">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-date-box>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="dx-field">
+                                <label class="form-label">Deskripsi Pekerjaan</label>
+                                <dx-text-area [height]="70" id="keterangan" [(value)]="keterangan" [stylingMode]="stylingMode" placeholder="Jelaskan tentang pekerjaan anda">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="async" [validationCallback]="validasi">
+                                        </dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-area>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-between btn-g">
+                            <button class="btn btn-create" (click)="onSubmit()" type="submit">
+                                <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Save
+                            </button>
+                            <button class="btn btn-create" routerLink="/end">Kirim</button>
+                        </div>
+                        <p class="info">Pilih save jika ingin menambahkan pengalaman !</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <div class="story" *ngFor="let value of pengalamanValue; let i = index">
+                    <div class="card card-story">
+                        <div class="item">
+                            <div class="card-title d-flex align-items-center">
+                                <span class="me-auto">
+                                    Pengalaman {{i + 1}}
+                                </span>
+                                <span class="delete d-flex align-items-center">
+                                    <span *ngIf="statusDelete" class="spinner-grow spinner-grow-sm spin-del" role="status" aria-hidden="true"></span>
+                                <i class="material-icons" (click)="deletePengalaman(value.id)">delete_forever</i>
+                                </span>
+                            </div>
+                            <div class="row card-list">
+                                <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                    Tempat Kerja
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                    {{value.tempatKerja}}
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                    Jabatan/Posisi
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                    {{value.posisi}}
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-12 card-excel">
+                                    Pengalaman Kerja
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-12 card-excelIsi">
+                                    {{value.keterangan}}
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                    Salary
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                    {{value.nominal}}
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                    Tanggal Masuk
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                    {{value.tglAwal | date:'longDate'}}
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-6 card-excel">
+                                    Tanggal Resign
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-6 card-excelIsi">
+                                    {{value.tglAkhir | date:'longDate'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

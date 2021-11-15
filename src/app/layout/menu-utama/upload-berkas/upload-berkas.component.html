@@ -1,0 +1,50 @@
+<section>
+    <div class="container-lg">
+        <div class="row justify-content-md-center">
+            <div class="col-md-7">
+                <div class="judul-pertanyaan">
+                    <h2>Upload File</h2>
+                    <p>Harap upload file !</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-7">
+                <div class="form-foto">
+                    <h4>Silahkan Upload Foto Anda!</h4>
+                    <p>Format Extends: <span>.jpg .jpeg .png </span></p>
+                    <div class="uploadForm">
+                        <dx-file-uploader (onUploaded)="prosesChange($event)" name="FileGambar" [uploadHeaders]="{
+                            token: token
+                        }" [allowedFileExtensions]="['.jpg', '.jpeg', '.png']" [(uploadUrl)]="apiFoto" [multiple]="false" accept="*" [(value)]="gambar" uploadMode="instantly">
+                        </dx-file-uploader>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-md-center ">
+            <div class="col-md-7">
+                <div class="form-foto">
+                    <h4>Silahkan Upload Cv Anda!</h4>
+                    <p>Format Extends: <span>.pdf</span></p>
+                    <div class="uploadForm">
+                        <dx-file-uploader (onUploaded)="prosesChangeCv($event)" name="FileGambar" [uploadHeaders]="{
+                            token: token
+                        }" [allowedFileExtensions]="['.pdf']" [(uploadUrl)]="apiCv" [multiple]="false" accept="*" [(value)]="cv" uploadMode="instantly">
+                        </dx-file-uploader>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-7">
+                <div class="d-grid gap-2 mt-5 mb-5">
+                    <button class="btn btn-create" (click)="onSubmit()" type="submit">
+                        <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Kirim File
+                      </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
